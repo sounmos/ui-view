@@ -62,7 +62,7 @@ export default defineComponent({
 }
 .before{
   transform: translateZ(20px);
-  background: #f1f1f1;
+  background: orange;
 }
 .after{
   transform: translateZ(-20px);
