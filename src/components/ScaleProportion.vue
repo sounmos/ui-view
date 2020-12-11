@@ -33,6 +33,11 @@ export default {
       const add: LocalHTMLElement = $id('proportion-add');
 
       if (minus && add && circle) {
+
+        if (content) {
+          content.style.width = `${currentProportion.value + 10}px`
+        }
+
         function changeContentWidth() {
           if (!content) {
             return;

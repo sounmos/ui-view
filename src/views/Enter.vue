@@ -30,7 +30,7 @@ export default defineComponent({
         if (enterContent) {
           enterContent.style.transform = `scale(${val / 100})`
         }
-      })
+      }, { immediate: true })
     })
   },
 });
