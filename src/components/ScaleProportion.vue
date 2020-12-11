@@ -4,7 +4,9 @@
     <div id="proportion-minus">-</div>
     <div>
       <div class="proportion-content" id="proportion-content">
-        <div class="proportion-circle" id="proportion-circle"></div>
+        <div class="proportion-circle" id="proportion-circle">
+          <div class="proportion-circle-small"></div>
+        </div>
       </div>
     </div>
     <div id="proportion-add">+</div>
@@ -85,17 +87,29 @@ export default {
   &-content{
     width: 110px;
     height: 4px;
-    background: red;
+    background: dodgerblue;
     position: relative;
   }
   &-circle{
     width: 10px;
     height: 10px;
-    background: red;
+    background: dodgerblue;
     border-radius: 50%;
     position: absolute;
     top: -3px;
     right: 0;
+  }
+  &-circle-small{
+    width: 4px;
+    height: 4px;
+    background: white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 50%;
   }
   &-text{
     position: absolute;
