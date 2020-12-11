@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts">
+// 页面缩放控制组件
 import { nextTick, ref, Ref } from 'vue';
 import { $id } from '@/utils';
 import { LocalHTMLElement } from '@/const/interface';
