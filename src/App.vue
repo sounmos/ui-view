@@ -1,30 +1,40 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
   <router-view/>
+  <!-- 缩放控制 -->
+  <div class="operation">
+    <ScaleProportion></ScaleProportion>
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import ScaleProportion from '@/components/ScaleProportion.vue';
+import { defineComponent } from 'vue';
 
-#nav {
-  padding: 30px;
-}
+export default defineComponent({
+  name: 'App',
+  components: {
+    ScaleProportion,
+  },
+});
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+<style lang="scss">
+html,body, #app{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#app{
+  transform-style: preserve-3d;
+}
+html, body, div, p, img {
+  margin: 0;
+  padding: 0;
+}
+.operation{
+  position: fixed;
+  top: 30px;
+  left: 40px;
+  z-index: 99999;
 }
 </style>
