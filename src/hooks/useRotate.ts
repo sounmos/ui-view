@@ -26,8 +26,11 @@ export const useRotate = () => {
         const childX = child.clientX;
         const childY = child.clientY;
 
-        const diffX = parentX - childX;
-        const diffY = parentY - childY;
+        const diffX = ~~((parentX - childX) / 4);
+        const diffY = ~~((parentY - childY) / 4);
+
+        const rotateY = originx + -diffX;
+        const rotateX = originY + diffY;
 
         // diffX 为正，表示绕 y 轴逆时针转动
         // diffX 为负，表示绕 y 轴顺时针转动
@@ -35,7 +38,7 @@ export const useRotate = () => {
         // diffY 为负，表示绕 x 轴顺时针转动
 
         // 容器转动，每次转动 5°
-        enter.style.transform = `rotateY(${originx + -diffX}deg) rotateX(${originY + diffY}deg)`;
+        enter.style.transform = `rotateY(${rotateY}deg) rotateX(${parseInt(`${rotateX}`)}deg)`;
       }
 
     }

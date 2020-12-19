@@ -99,7 +99,7 @@ export default {
     top: -3px;
     right: 0;
   }
-  &-circle-small{
+    &-circle-small{
     width: 4px;
     height: 4px;
     background: white;

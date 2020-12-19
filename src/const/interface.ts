@@ -7,3 +7,7 @@ export type BasicObject = {
 }
 
 export type Iprops = BasicObject;
+
+export interface ExpandElement extends Element {
+  currentStyle: BasicObject;
+}

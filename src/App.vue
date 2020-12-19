@@ -24,9 +24,6 @@ html,body, #app{
   height: 100%;
   overflow: hidden;
 }
-#app{
-  transform-style: preserve-3d;
-}
 html, body, div, p, img {
   margin: 0;
   padding: 0;

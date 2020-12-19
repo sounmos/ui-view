@@ -14,7 +14,10 @@ import { defineComponent, watch, nextTick } from 'vue';
 import { currentProportion } from '@/store';
 import { $id } from '@/utils';
 import {LocalHTMLElement} from '@/const/interface';
-import { useRotate } from '@/hooks';
+import {
+  useRotate,
+  useCompilerHtml,
+} from '@/hooks';
 export default defineComponent({
   name: 'Home',
   components: {
@@ -22,6 +25,8 @@ export default defineComponent({
   setup() {
     // 添加旋转功能。
     useRotate()
+    // 开始解析html内容
+    useCompilerHtml();
 
     nextTick(() => {
       const enterContent: LocalHTMLElement = $id('enter-content');
@@ -52,6 +57,7 @@ export default defineComponent({
   right: 0;
   margin: auto;
   transform-style: preserve-3d;
+  border: 4px solid gray;
 }
 
 /*demo*/
@@ -59,13 +65,13 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   position: absolute;
+  border: 4px solid gray;
+  background: #f1f1f1;
 }
 .before{
   transform: translateZ(20px);
-  background: orange;
 }
 .after{
   transform: translateZ(-20px);
-  background: #989898;
 }
 </style>
