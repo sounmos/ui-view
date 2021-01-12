@@ -18,10 +18,12 @@ export const getStyle = (obj: ExpandElement, attr: string) => {
 };
 
 // 获取 translateZ 的样式
+// getStyle((<ExpandElement>item), 'transform') 获取到的是一个 4 * 4 的矩阵
 export const getTransformZValue = (item: Element) => {
-  return getStyle((<ExpandElement>item), 'transformStyle')
+  const matrix3d = getStyle((<ExpandElement>item), 'transform')
+  const positionZ = matrix3d.split(/,\s*/)
+  return positionZ?.[positionZ.length - 2] ?? 0
 };
-
 // 获取 z-index 的值
 export const getZIndex = (item: Element) => {
   return getStyle((<ExpandElement>item), 'z-index');
@@ -40,10 +42,10 @@ export const sortChildren = (dom: Element) => {
 
 // 快速排序，排列得到的组合
 export const quickSort = (arr: Element[], type = ''): Element[] => {
-  const getArrValue = type ? getZIndex : getTransformZValue;
+  const getArrValue = type ? getTransformZValue : getZIndex;
 
   if (arr.length <= 1) {
-    sortChildren(arr[0]);
+    sortChildren(arr?.[0]);
     return arr;
   }
 
@@ -58,7 +60,7 @@ export const quickSort = (arr: Element[], type = ''): Element[] => {
   const right = [];
 
   for (let i = 0; i < arr.length; i++){
-    if (getArrValue(arr[i]) < getArrValue(pivot)) {
+    if (~~(getArrValue(arr[i])) < ~~(getArrValue(pivot))) {
 
       left.push(arr[i]);
 
@@ -70,7 +72,7 @@ export const quickSort = (arr: Element[], type = ''): Element[] => {
 
   }
 
-  return quickSort(left).concat([pivot], quickSort(right));
+  return quickSort(left, type).concat([pivot], quickSort(right, type));
 
 };
 
@@ -110,6 +112,4 @@ export const sort = (list: Element[], type = ''): Element[] => {
     return quickSortByZIndex(list);
   }
   return quickSortByTransformStyle(list);
-
-  return list;
 };

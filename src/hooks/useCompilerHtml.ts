@@ -23,7 +23,6 @@ export const start = (list: Element[]) => {
 
 export const log = (list: Element[]) => {
   list.forEach(item => {
-    console.log(item);
     if (item.children) {
       log(toArray(item.children));
     }
