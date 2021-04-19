@@ -1,21 +1,21 @@
 import { toArray, sort, getFilter } from '@/utils'
+import { ref, Ref } from 'vue';
 
-export const useCompilerHtml = (id = '') => {
+export const useCompilerHtml = (id = '#box') => {
   // 解析需要在 window 渲染完成之后
   window.onload = function () {
-    if(id) {
-      const div: Element | null = document.querySelector(id);
-    } else {
-      const atomicList: HTMLElement[] = toArray(document.body.children);
-      // 开始前需要将dom中的内容过滤
-      start(getFilter(atomicList));
-    }
+    const result = {};
+    const atomicList: Ref = ref([]);
+    atomicList.value =  toArray(id ? [document?.querySelector(id)] : document.body.children)
+
+    // 开始前需要将dom中的内容过滤
+    start(getFilter(atomicList.value), result);
   };
 };
 
 // 开始解析dom标签
-export const start = (list: Element[]) => {
-  list = sort(list);
+export const start = (list: Element[], result = {}) => {
+  list = sort(list, '', result);
   // 打印log
   log(list);
 };

@@ -36,12 +36,12 @@ export const sortChildren = (dom: Element) => {
     if (getStyle((<ExpandElement>dom), 'transformStyle') === 'preserve-3d') {
       type = 'transformStyle';
     }
-    sort(toArray(dom?.children), type);
+    return sort(toArray(dom?.children), type);
   }
 };
 
 // 快速排序，排列得到的组合
-export const quickSort = (arr: Element[], type = ''): Element[] => {
+export const quickSort = (arr: Element[], type = '', result = {}): Element[] => {
   const getArrValue = type ? getTransformZValue : getZIndex;
 
   if (arr.length <= 1) {
@@ -73,23 +73,22 @@ export const quickSort = (arr: Element[], type = ''): Element[] => {
   }
 
   return quickSort(left, type).concat([pivot], quickSort(right, type));
-
 };
 
 // 按照 transformStyle 来排序
-export const quickSortByTransformStyle = (list: Element[]): Element[] => {
+export const quickSortByTransformStyle = (list: Element[], result = {}): Element[] => {
   if (!list.length) {
     return [];
   }
-  return quickSort(list, 'transformStyle');
+  return quickSort(list, 'transformStyle', result);
 };
 
 // 按照 z-index 来排序
-export const quickSortByZIndex = (list: Element[]): Element[] => {
+export const quickSortByZIndex = (list: Element[], result = {}): Element[] => {
   if (!list.length) {
     return [];
   }
-  return quickSort(list);
+  return quickSort(list, '', result);
 };
 
 // 类数组转换为数组
@@ -104,12 +103,12 @@ export const getFilter = (list: HTMLElement[]) => {
 };
 
 // 根据层级将元素排序
-export const sort = (list: Element[], type = ''): Element[] => {
+export const sort = (list: Element[], type = '', result = {}): Element[] => {
   // 数组中只有一个元素，直接返回数组
-  if (list.length <= 1) return list;
+  if (list.length <= 0) return list;
 
   if (!type) {
-    return quickSortByZIndex(list);
+    return quickSortByZIndex(list, result);
   }
-  return quickSortByTransformStyle(list);
+  return quickSortByTransformStyle(list, result);
 };
